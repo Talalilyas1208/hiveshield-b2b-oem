@@ -17,6 +17,8 @@
     "db:studio": "prisma studio"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.3.4",
+    "@ant-design/nextjs-registry": "^1.3.0",
     "@aws-sdk/client-s3": "^3.700.0",
     "@aws-sdk/s3-request-presigner": "^3.700.0",
     "@hookform/resolvers": "^3.9.1",
@@ -36,6 +38,7 @@
     "@react-pdf/renderer": "^4.1.5",
     "@upstash/ratelimit": "^2.0.5",
     "@upstash/redis": "^1.34.3",
+    "antd": "^6.6.8",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^11.15.0",
