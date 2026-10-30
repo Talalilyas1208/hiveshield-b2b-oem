@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 42 29% 94%;
+    --foreground: 40 3% 8%;
+  }
+}
+
+body {
+  background-color: #F4F1EA;
+  color: #141413;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom architectural range slider (zero AI rounded pill look) */
+input[type="range"].industrial-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: #141413;
+  outline: none;
+}
+
+input[type="range"].industrial-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #1C352D;
+  border: 2px solid #F4F1EA;
+  outline: 1px solid #141413;
+  cursor: pointer;
+}
