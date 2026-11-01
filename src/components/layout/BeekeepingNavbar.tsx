@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button, Drawer } from "antd";
 import {
   CustomerServiceOutlined,
@@ -11,11 +13,19 @@ import {
 } from "@ant-design/icons";
 
 interface BeekeepingNavbarProps {
-  onOpenQuoteModal: () => void;
+  onOpenQuoteModal?: () => void;
 }
+
+const NAV_LINKS = [
+  { href: "/", label: "Custom Suit Builder" },
+  { href: "/catalog", label: "Wholesale Catalog" },
+  { href: "/sting-testing-lab", label: "4.5mm Sting Lab" },
+  { href: "/sample-kit", label: "Sample Kit ($35)" },
+];
 
 export function BeekeepingNavbar({ onOpenQuoteModal }: BeekeepingNavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <>
@@ -41,36 +51,47 @@ export function BeekeepingNavbar({ onOpenQuoteModal }: BeekeepingNavbarProps) {
 
       <header className="bg-white/95 backdrop-blur-md border-b border-[#E5E1D8] sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#1C1B18] text-white font-extrabold flex items-center justify-center text-base tracking-tight">
+          <Link href="/" className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-[#1C1B18] text-white font-extrabold flex items-center justify-center text-base">
               HS
             </div>
             <div>
-              <span className="font-bold text-base sm:text-lg tracking-tight block leading-none">
+              <span className="font-bold text-base sm:text-lg tracking-tight block leading-none text-[#1C1B18]">
                 HiveShield
               </span>
               <span className="text-[11px] text-[#6E6A63] font-medium">
                 Direct Factory Custom Ordering
               </span>
             </div>
-          </div>
+          </Link>
 
-          <nav className="hidden md:flex items-center gap-6 text-sm text-[#5C5852]">
-            <span className="font-bold text-[#1C1B18]">Custom Suit Builder</span>
-            <span className="hover:text-[#1C1B18] cursor-pointer transition">
-              Goatskin Gloves
-            </span>
-            <span className="hover:text-[#1C1B18] cursor-pointer transition">
-              Swatch Sample Kit ($35)
-            </span>
-            <Button
-              type="default"
-              icon={<CustomerServiceOutlined />}
-              onClick={onOpenQuoteModal}
-              className="!rounded-xl !font-semibold !border-[#D6D2C9]"
-            >
-              Talk to Factory Team
-            </Button>
+          <nav className="hidden md:flex items-center gap-6 text-sm">
+            {NAV_LINKS.map((item) => {
+              const active = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={
+                    active
+                      ? "font-bold text-[#1C1B18]"
+                      : "text-[#5C5852] hover:text-[#1C1B18] transition"
+                  }
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+            {onOpenQuoteModal && (
+              <Button
+                type="default"
+                icon={<CustomerServiceOutlined />}
+                onClick={onOpenQuoteModal}
+                className="!rounded-xl !font-semibold !border-[#D6D2C9]"
+              >
+                Talk to Factory
+              </Button>
+            )}
           </nav>
 
           <div className="md:hidden">
@@ -90,24 +111,18 @@ export function BeekeepingNavbar({ onOpenQuoteModal }: BeekeepingNavbarProps) {
         onClose={() => setMobileMenuOpen(false)}
       >
         <div className="flex flex-col gap-4 text-base font-semibold">
-          <span className="text-[#1C1B18]">1. Custom Suit Builder</span>
-          <span className="text-[#5C5852]">2. Goatskin Apiary Gloves</span>
-          <span className="text-[#5C5852]">3. Fabric Swatch Kit ($35)</span>
-          <Button
-            type="primary"
-            size="large"
-            block
-            onClick={() => {
-              setMobileMenuOpen(false);
-              onOpenQuoteModal();
-            }}
-            className="mt-4 !bg-[#1C1B18] !rounded-xl"
-          >
-            Request Official Quote
-          </Button>
+          {NAV_LINKS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-[#1C1B18]"
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
       </Drawer>
     </>
   );
 }
-

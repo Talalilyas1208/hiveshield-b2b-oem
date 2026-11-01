@@ -5,6 +5,7 @@ import { message } from "antd";
 import { CheckCircleFilled } from "@ant-design/icons";
 import { useBeeSuitConfigurator } from "@/store/useOemBuilderStore";
 import { BeekeepingNavbar } from "@/components/layout/BeekeepingNavbar";
+import { B2bFooter } from "@/components/layout/B2bFooter";
 import { VolumeTierBanner } from "@/components/beekeeping/VolumeTierTable";
 import { OrderStepSection } from "@/components/ui/OrderStepSection";
 import { QuickSizeMatrix } from "@/components/beekeeping/QuickSizeMatrix";
@@ -103,6 +104,8 @@ export default function CleanBeekeepingOrderPage() {
           </div>
         </div>
       </main>
+
+      <B2bFooter />
 
       <QuoteRequestModal
         open={quoteModalOpen}
